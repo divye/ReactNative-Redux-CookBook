@@ -12,17 +12,18 @@ import {ActionCreators} from '../actions';
 class AppContainer extends Component {
 
   constructor(props) {
-    this.state = { recipeCount: 0 }
+    super(props);
   }
-  incrementRecipeCount(){
-    this.setState({recipeCount: this.state.recipeCount+1});
+
+  addRecipe(){
+    this.props.addRecipe();
   }
   render(){
     return <View>
       <Text style={{marginTop: 20}}>
-        App container
+        App container Recipe Count: {this.props.recipeCount}
       </Text>
-      <TouchableHighlight onPress={() => {this.incrementRecipeCount()}}>
+      <TouchableHighlight onPress={() => {this.addRecipe()}}>
         <Text>Add Recipes</Text>
       </TouchableHighlight>
     </View>
@@ -33,4 +34,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators,dispatch);
 }
 //connect takes in two functions and wires all the dispatchinga actions
-export default connect(() => { return {}}, mapDispatchToProps)(AppContainer);
+//state object is the global state of the application
+export default connect((state) => { return {
+  recipeCount: state.recipeCount
+}}, mapDispatchToProps)(AppContainer);
