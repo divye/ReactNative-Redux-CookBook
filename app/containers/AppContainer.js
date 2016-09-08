@@ -1,14 +1,8 @@
 import React, {Component} from 'react'
-import {
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View
-} from 'react-native';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 import {ActionCreators} from '../actions';
-
+import Home from './Home'
 class AppContainer extends Component {
 
   constructor(props) {
@@ -19,14 +13,7 @@ class AppContainer extends Component {
     this.props.addRecipe();
   }
   render(){
-    return <View>
-      <Text style={{marginTop: 20}}>
-        App container Recipe Count: {this.props.recipeCount}
-      </Text>
-      <TouchableHighlight onPress={() => {this.addRecipe()}}>
-        <Text>Add Recipes</Text>
-      </TouchableHighlight>
-    </View>
+    return <Home {...this.props} />
   }
 }
 //Used to send the actions (or dispatching actions)to the entire application
@@ -36,5 +23,4 @@ function mapDispatchToProps(dispatch) {
 //connect takes in two functions and wires all the dispatchinga actions
 //state object is the global state of the application
 export default connect((state) => { return {
-  recipeCount: state.recipeCount
 }}, mapDispatchToProps)(AppContainer);

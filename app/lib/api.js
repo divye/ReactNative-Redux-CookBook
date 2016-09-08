@@ -4,6 +4,9 @@ class Api {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'dataType': 'json',
+      'X-Requested-With': 'XMLHttpRequest',
+      'X-Mashape-Key': 'yDQnvGJbnmmshWzEvYRlcXjH44xQp1ry09njsnfBU1YalOqIJ2'
+
     }
   }
 
@@ -24,7 +27,7 @@ class Api {
   }
 
   static xhr(route, params, verb) {
-    const host = 'http://www.recipepuppy.com'
+    const host = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com'
     const url = `${host}${route}`
     let options = Object.assign({ method: verb }, params ? { body: JSON.stringify(params) } : null );
     options.headers = Api.headers()
@@ -34,7 +37,7 @@ class Api {
         return json
       }
       return json.then(err => {throw err});
-    }).then( json => json.results );
+    })
   }
 }
 export default Api
